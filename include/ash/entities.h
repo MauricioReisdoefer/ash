@@ -3,6 +3,7 @@
 #include <stdint.h>
 
 #define ASH_MAX_ENTITIES 16512
+#define ASH_INVALID_ENTITY_INDEX UINT32_MAX
 
 typedef struct ASH_Entity
 {
