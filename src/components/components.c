@@ -1,5 +1,6 @@
 #include <ash/components.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 static ASH_Component g_components[ASH_MAX_COMPONENTS];
 static uint32_t g_componentCount;
@@ -17,6 +18,7 @@ uint32_t ASH_RegisterComponent(size_t size)
     {
         component->entityHasComponent[i] = 0;
     }
+    return id;
 }
 
 void *ASH_AddComponent(uint32_t componentId, ASH_Entity entity)
@@ -32,6 +34,7 @@ void *ASH_AddComponent(uint32_t componentId, ASH_Entity entity)
 
     void *ptr = (uint8_t *)component->pool + (entity.index * component->componentSize);
     component->entityHasComponent[entity.index] = 1;
+    return ptr;
 }
 
 uint8_t ASH_HasComponent(uint32_t componentId, ASH_Entity entity)
@@ -75,8 +78,4 @@ void ASH_RemoveComponent(uint32_t componentId, ASH_Entity entity)
     if (!component->entityHasComponent[entity.index])
         return;
     component->entityHasComponent[entity.index] = 0;
-    void *ptr = (uint8_t *)component->pool +
-                (entity.index * component->componentSize);
-
-    memset(ptr, 0, component->componentSize);
 }
