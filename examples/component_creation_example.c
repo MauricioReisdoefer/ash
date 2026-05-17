@@ -38,5 +38,6 @@ int main()
     {
         printf("Transform removido da entidade!\n");
     }
+
     return 0;
 }
