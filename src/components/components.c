@@ -33,3 +33,50 @@ void *ASH_AddComponent(uint32_t componentId, ASH_Entity entity)
     void *ptr = (uint8_t *)component->pool + (entity.index * component->componentSize);
     component->entityHasComponent[entity.index] = 1;
 }
+
+uint8_t ASH_HasComponent(uint32_t componentId, ASH_Entity entity)
+{
+    if (componentId >= g_componentCount)
+        return 0;
+    ASH_Component *component = &g_components[componentId];
+    if (!component->active)
+        return 0;
+    return component->entityHasComponent[entity.index];
+}
+
+void *ASH_GetComponent(uint32_t componentId, ASH_Entity entity)
+{
+    if (componentId >= g_componentCount)
+    {
+        printf("ASH_GetComponent - ComponentID Out Of Range\n");
+        return NULL;
+    }
+    ASH_Component *component = &g_components[componentId];
+    if (!component->active)
+        return NULL;
+
+    if (!component->entityHasComponent[entity.index])
+        return NULL;
+    return (uint8_t *)component->pool +
+           (entity.index * component->componentSize);
+}
+
+void ASH_RemoveComponent(uint32_t componentId, ASH_Entity entity)
+{
+    if (componentId >= g_componentCount)
+    {
+        printf("ASH_RemoveComponent - ComponentID Out Of Range\n");
+        return;
+    }
+    ASH_Component *component = &g_components[componentId];
+
+    if (!component->active)
+        return;
+    if (!component->entityHasComponent[entity.index])
+        return;
+    component->entityHasComponent[entity.index] = 0;
+    void *ptr = (uint8_t *)component->pool +
+                (entity.index * component->componentSize);
+
+    memset(ptr, 0, component->componentSize);
+}
