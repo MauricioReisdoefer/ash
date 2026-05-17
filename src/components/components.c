@@ -18,3 +18,18 @@ uint32_t ASH_RegisterComponent(size_t size)
         component->entityHasComponent[i] = 0;
     }
 }
+
+void *ASH_AddComponent(uint32_t componentId, ASH_Entity entity)
+{
+    if (componentId > ASH_MAX_COMPONENTS)
+    {
+        printf("ASH_AddComponent - ComponentID Out Of Range");
+        return NULL;
+    }
+    ASH_Component *component = &g_components[componentId];
+    if (component->active == 0)
+        return NULL;
+
+    void *ptr = (uint8_t *)component->pool + (entity.index * component->componentSize);
+    component->entityHasComponent[entity.index] = 1;
+}

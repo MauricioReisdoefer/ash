@@ -14,3 +14,4 @@ typedef struct ASH_Component
 } ASH_Component;
 
 uint32_t ASH_RegisterComponent(size_t size);
+void *ASH_AddComponent(uint32_t componentId, ASH_Entity entity);
