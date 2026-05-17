@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+#define _ASH_MAX_COMPONENTS 2048
+
 typedef struct
 {
     void *data;
