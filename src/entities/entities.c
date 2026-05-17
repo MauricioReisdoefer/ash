@@ -1,4 +1,4 @@
-#include <include/ash/entities.h>
+#include <ash/entities.h>
 
 static uint32_t g_entityFreelist[ASH_MAX_ENTITIES];
 static uint32_t g_entityFreelistCount;
