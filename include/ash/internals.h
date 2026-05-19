@@ -34,3 +34,5 @@ typedef struct
 _ASH_Pool _ASH_CreatePool(size_t size);
 _ASH_ComponentStorage _ASH_CreateComponentStorage(size_t componentSize, uint32_t capacity);
 void _ASH_InitComponentRegistry();
+
+extern _ASH_ComponentRegistry g_componentRegistry;
