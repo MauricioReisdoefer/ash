@@ -4,7 +4,7 @@
 #include <ash/internals.h>
 #include <ash/entities.h>
 
-static _ASH_ComponentRegistry g_componentRegistry;
+_ASH_ComponentRegistry g_componentRegistry;
 
 _ASH_Pool _ASH_CreatePool(size_t size)
 {
